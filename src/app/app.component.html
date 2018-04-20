@@ -1,0 +1,19 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div>
+    <div class="col-lg-6 col-xs-12 fixed-top" style="display: inline-block;position: relative;margin-top:0px;">
+        <span class="alert alert-info" style="position: static;">Tree-View</span><br>
+        <div style="height: 50px;"></div>
+        <tree [tree]="tree" (nodeSelected)="logEvent($event)" >
+            
+        </tree>
+    </div>
+    <!--<button type="button" class="btn btn-primary" (click)="changeNodes()">submit</button>-->
+    <div class="col-lg-6 col-xs-12" style="display:inline-block;width:auto;position: relative;">
+        <span class="alert alert-danger">Edit Tree-View</span><br>
+        <div style="height: 50px;"></div>
+        <textarea  class="form-control" rows="4" cols="50" (id)="text_area" style="height:230px;margin-top: 15px;" (blur)="changeNodes($this)" #text_area>
+                {{tree | json}}
+        </textarea><br>
+    </div>
+</div>
+
