@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { TreeModule } from 'angular-tree-component';
 import { ViewChild,ElementRef } from '@angular/core'
 import { TreeModel, NodeEvent } from 'ng2-tree';
+import { JsonPipe } from '@angular/common';
 declare var angular: any;
 @Component({
   selector: 'app-root',
@@ -33,5 +34,9 @@ export class AppComponent {
   }
   public logEvent(e: NodeEvent): void {
     console.log(e);
+
+  }
+  public changeJSON(e:NodeEvent): void{
+    //this.text_area.nativeElement.value = JSON.stringify(this.tree);
   }
 }

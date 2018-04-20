@@ -1,9 +1,9 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<div>
+<div style="margin-top:50px;">
     <div class="col-lg-6 col-xs-12 fixed-top" style="display: inline-block;position: relative;margin-top:0px;">
         <span class="alert alert-info" style="position: static;">Tree-View</span><br>
         <div style="height: 50px;"></div>
-        <tree [tree]="tree" (nodeSelected)="logEvent($event)" >
+        <tree [tree]="tree" (nodeSelected)="logEvent($event)" (nodeRemoved)="changeJSON($event)" >
             
         </tree>
     </div>
