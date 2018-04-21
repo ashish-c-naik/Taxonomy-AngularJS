@@ -1,0 +1,24 @@
+ul{
+    cursor: pointer;
+}
+.menuOptions:hover{
+    background: grey;
+}
+.menu{
+    align-content: center;
+    padding: 2px;
+    height: 130px;
+    width: 130px;
+    position: relative;
+    background: #ebebeb;
+    padding:5px;
+    border-radius: 10px;
+    border-color:black;
+    box-shadow: 10px 10px 10px grey;
+}
+.menu a{
+    color: black;
+}
+.menu a:hover{
+    text-decoration: none;
+}

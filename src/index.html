@@ -4,6 +4,8 @@
   <meta charset="utf-8">
   <title>Taxonomy</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
   <base href="/">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -15,10 +17,10 @@
     </nav>
     <ul class="nav nav-tabs" id="myTab" role="tablist">
       <li class="nav-item">
-        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Tree-View</a>
+        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Module import</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Graph-View</a>
+        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Custom tree</a>
       </li>
     </ul>
     <div class="tab-content" id="myTabContent">
@@ -26,7 +28,7 @@
         <app-root></app-root>
       </div>
       <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-        ...
+        <app-my-tree></app-my-tree>
       </div>
     </div>
     
