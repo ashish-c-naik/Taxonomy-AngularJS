@@ -1,6 +1,9 @@
 ul{
     cursor: pointer;
 }
+ul{
+    cursor: pointer;
+}
 .menuOptions:hover{
     background: grey;
 }
@@ -14,7 +17,7 @@ ul{
     padding:5px;
     border-radius: 10px;
     border-color:black;
-    box-shadow: 10px 10px 10px grey;
+    box-shadow: 10px 2px 10px grey;
 }
 .menu a{
     color: black;
@@ -22,3 +25,13 @@ ul{
 .menu a:hover{
     text-decoration: none;
 }
+#editArea{
+    position: fixed;
+    top:30vh;
+    left: 50vw;
+    display: none;
+}
+#editArea span{
+    font-style: bold;   
+}
+

@@ -1,0 +1,6 @@
+@import '~angular-tree-component/dist/angular-tree-component.css';
+.node-content-wrapper-active, .node-content-wrapper.node-content-wrapper-active:hover, .node-content-wrapper-active.node-content-wrapper-focused{
+    background: none;
+    border: none;
+    box-shadow: none;
+}

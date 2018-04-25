@@ -1,14 +1,12 @@
 import { Component } from '@angular/core';
-import { TreeModule } from 'angular-tree-component';
-import { ViewChild,ElementRef } from '@angular/core'
-import { TreeModel, NodeEvent } from 'ng2-tree';
-import { JsonPipe } from '@angular/common';
 declare var angular: any;
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
 })
 export class AppComponent {
+}
+/*
   public tree: TreeModel = {
     value: 'Programming languages by programming paradigm',
     children: [
@@ -36,7 +34,9 @@ export class AppComponent {
     console.log(e);
 
   }
+  
   public changeJSON(e:NodeEvent): void{
     //this.text_area.nativeElement.value = JSON.stringify(this.tree);
   }
 }
+*/

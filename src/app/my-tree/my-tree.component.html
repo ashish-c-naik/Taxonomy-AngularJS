@@ -1,112 +1,47 @@
 <div>
-  <div style="margin-top:50px;margin-bottom: 50px;margin-left: 15px;">
-  <span class="alert alert-info" style="position: static;margin-top: 100px;">Tree-View</span><br>
-</div>
-  <ul>
-    <li data-toggle="collapse" data-target=".outer" (dblclick)="MakeBold($event)">
-      {{data.value}}
-      <div (id)="menu1" class="menu" style="display:none;" #menu>
-          <div >
-            <div class="menuOptions">
-              <i class="material-icons" style="top: 1vh;position: relative;">create</i>
-              <a href="#" (click) = "Rename($event)"> 
-                Rename
-              </a>
-            </div>
-          <div class="menuOptions">
-              <i class="material-icons" style="top: 1vh;position: relative;">delete_sweep</i>
-              <a href="#" (click) = "Remove($event)"> 
-                Remove
-              </a>
-            </div>
-          <div class="menuOptions">
-              <i class="material-icons" style="top: 1vh;position: relative;">add</i>
-              <a href="#" (click) = "New($event)"> 
-                New
-              </a>
-            </div>
-          <div class="menuOptions">
-              <i class="material-icons" style="top: 1vh;position: relative;">clear</i>
-              <a href="#" (click) = "Close($event)"> 
-                Close
-              </a>
-            </div>
+        <div style="margin-top:50px;margin-bottom:20px;margin-left: 15px;">
+            <span class="alert alert-info" style="position: static;margin-top: 100px;">Tree-View</span><br>
+    
         </div>
+        <div style="margin-left:15px;">
+            <tree-root [nodes]="data" (activate)="MakeBold($event.node.data.id)">
+                <ng-template #treeNodeTemplate let-node let-index="index">
+                    <span>{{node.data.name}}</span>
+                    <div id="menu{{node.data.id}}" class="menu" style="display: none;float: right;" #menu>
+                        <div>
+                            <div class="menuOptions">
+                                <i class="material-icons" style="top: 1vh;position: relative;">create</i>
+                                <a href="#" (click)="Rename(node)"> 
+                                    Rename
+                                </a>
+                            </div>
+                            <div class="menuOptions">
+                                <i class="material-icons" style="top: 1vh;position: relative;">delete_sweep</i>
+                                <a href="#" (click)="Remove(node)"> 
+                                    Remove
+                                </a>
+                            </div>
+                            <div class="menuOptions">
+                                <i class="material-icons" style="top: 1vh;position: relative;">add</i>
+                                <a href="#" (click)="New(node)"> 
+                                    New
+                                </a>
+                            </div>
+                            <div class="menuOptions">
+                                <i class="material-icons" style="top: 1vh;position: relative;">clear</i>
+                                <a href="#" (click)="Close($event)"> 
+                                    Close
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </ng-template>
+            </tree-root>
         </div>
-    </li>
-    <ul *ngFor="let item of data.children" class="outer in" >
-        <li  data-toggle="collapse" attr.data-target=".Location{{item.id}}" (dblclick)="MakeBold($event)">            
-          {{item.value}}
-          <div (id)="menu1" class="menu" style="display:none;" #menu>
-              <div >
-                <div class="menuOptions">
-                  <i class="material-icons" style="top: 1vh;position: relative;">create</i>
-                  <a href="#" (click) = "Rename($event)"> 
-                    Rename
-                  </a>
-                </div>
-              <div class="menuOptions">
-                  <i class="material-icons" style="top: 1vh;position: relative;">delete_sweep</i>
-                  <a href="#" (click) = "Remove($event)"> 
-                    Remove
-                  </a>
-                </div>
-              <div class="menuOptions">
-                  <i class="material-icons" style="top: 1vh;position: relative;">add</i>
-                  <a href="#" (click) = "New($event)"> 
-                    New
-                  </a>
-                </div>
-              
-              <div class="menuOptions">
-                  <i class="material-icons" style="top: 1vh;position: relative;">clear</i>
-                  <a href="#" (click) = "Close($event)"> 
-                    Close
-                  </a>
-                </div>
-            </div>
-            </div>
-        </li>
-        <ul  *ngFor="let child of item.children" attr.class="Location{{item.id}}">
-          <li (dblclick)="MakeBold($event)">
-              {{child.value}}
-              <div (id)="menu1" class="menu" style="display:none;" #menu>
-                  <div >
-                    <div class="menuOptions">
-                      <i class="material-icons" style="top: 1vh;position: relative;">create</i>
-                      <a href="#" (click) = "Rename($event)"> 
-                        Rename
-                      </a>
-                    </div>
-                  <div class="menuOptions">
-                      <i class="material-icons" style="top: 1vh;position: relative;">delete_sweep</i>
-                      <a href="#" (click) = "Remove($event)"> 
-                        Remove
-                      </a>
-                    </div>
-                  <div class="menuOptions">
-                      <i class="material-icons" style="top: 1vh;position: relative;">add</i>
-                      <a href="#" (click) = "New($event)"> 
-                        New
-                      </a>
-                    </div>
-                 
-                  <div class="menuOptions">
-                      <i class="material-icons" style="top: 1vh;position: relative;">clear</i>
-                      <a href="#" (click) = "Close($event)"> 
-                        Close
-                      </a>
-                    </div>
-                </div>
-                </div>
-          </li>
-        </ul>
-
-      </ul> 
-    </ul>
-    <div>
-      <textarea #text_area1 name="text_area"  (id)="text_area1" cols="30" rows="10" (blur)="RenameName($event)" style="display:none;">
-
-      </textarea>  
-    </div>
-</div>
+        <div #text_area1  id="editArea">
+            <span>Type new name here:</span><br>
+            <textarea name="text_area" value="New Node" id="text_area" cols="30" rows="1" (blur)="RenameName($event.target.value)" >
+                New name
+            </textarea>
+        </div>
+    </div>  

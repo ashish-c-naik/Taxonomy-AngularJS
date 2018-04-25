@@ -1,84 +1,123 @@
-import { Component, OnInit,Directive, ElementRef, ViewChild } from '@angular/core';
-import { element } from 'protractor';
-
+import {
+    Component,
+    OnInit,
+    Directive,
+    ElementRef,
+    ViewChild
+} from '@angular/core';
+import {
+    element
+} from 'protractor';
+declare var angular: any;
 @Component({
-  selector: 'app-my-tree',
-  templateUrl: './my-tree.component.html',
-  styleUrls: ['./my-tree.component.css']
+    selector: 'app-my-tree',
+    templateUrl: './my-tree.component.html',
+    styleUrls: ['./my-tree.component.css']
 })
 export class MyTreeComponent implements OnInit {
-  counter = 0
-  constructor() {
-    //console.log(this.numbers[0].name);
-   }
-   data ={
-    value: 'Programming languages by programming paradigm',
-    id:1,
-    children: [
-      {
-        value: 'Object-oriented programming',
-        id:2,
-        children: [{ value: 'Java',"id":3 }, { value: 'C++',"id":4  }, { value: 'C#',"id":5  }]
-      },
-      {
-        value: 'Prototype-based programming',
-        id:6,
-        children: [{ value: 'JavaScript',"id":7  }, { value: 'CoffeeScript',"id":8  }, { value: 'Lua',"id":9  }]
-      }
-    ]
-  };
-  
-  @ViewChild('menu') menu: ElementRef;
-  display = false
-  public MakeBold = function(e) {
-    console.log(e.srcElement.childNodes[1].style.display)
-    if (this.display == false){
-      this.display = true
-      e.srcElement.childNodes[1].style.display = "block";
+    private counter: number = 10
+    private display: boolean = false
+    private confirmed: boolean
+    private rename: Element
+    private nodeId: number
+    private data = {}
+    constructor() {
+        this.data = [{
+                id: 1,
+                name: 'Programming languages by programming paradigm',
+                children: [{
+                        id: 2,
+                        name: 'Object-oriented programming',
+                        children: [{
+                            id:3,
+                            name:"Java",
+                            children:[]
+                        },{
+                            id:4,
+                            name:"C++",
+                            children:[]
+                        },{
+                            id:5,
+                            name:"C#",
+                            children:[]
+                        }]
+                    },
+                    {
+                        id: 6,
+                        name: 'Prototype-based programming',
+                        children: [{
+                            id:7,
+                            name:"Javascript",
+                            children:[]
+                        },{
+                            id:8,
+                            name:"Coffeescript",
+                            children:[]
+                        },{
+                            id:9,
+                            name:"Lua",
+                            children:[]
+                        }]
+                    }
+                ]
+            }
+        ];
     }
-    else{
-    e.srcElement.childNodes[1].style.display = "none";
-    this.display = false
+
+    @ViewChild('menu') menu: ElementRef;
+    public MakeBold = function(e) {
+        console.log(e)
+        if (this.display == false) {
+            this.display = true
+            console.log(angular.element("#menu" + e + ""))
+            angular.element("#menu" + e + "")[0].style.display = "inline-block";
+        } else {
+            angular.element("#menu" + e + "")[0].style.display = "none";
+            this.display = false
+        }
     }
-  }
-  @ViewChild('text_area1') text_area1: ElementRef;
-  rename;
-  public Rename = function(e){
-    console.log(e)
-    this.rename = e.path[4+this.counter]
-    this.text_area1.nativeElement.style.display = "block"
-  }
-  public RenameName = function(e){
-    console.log(this.rename.childNodes[0])
-    if(e.srcElement.value.replace(" ","") != "")
-    this.rename.childNodes[0].data = e.srcElement.value;
-    this.text_area1.nativeElement.style.display = "none"
-  }
-  public Remove = function(e){
-    console.log(e.path[4+this.counter])
-    e.path[4+this.counter].remove();
-  }
-  public New = function(e){
-    console.log(e.path)
-    e.path[4+this.counter].append('<li data-toggle="collapse" data-target=".outer" (dblclick)="MakeBold($event)">NewNode<div (id)="menu1" class="menu" style="display:none;" #menu> <div > <div class="menuOptions"> <i class="material-icons" style="top: 1vh;position: relative;">create</i> <a href="#" (click) = "Rename($event)"> Rename </a> </div> <div class="menuOptions"> <i class="material-icons" style="top: 1vh;position: relative;">delete_sweep</i> <a href="#" (click) = "Remove($event)"> Remove </a> </div> <div class="menuOptions"> <i class="material-icons" style="top: 1vh;position: relative;">add</i> <a href="#" (click) = "New($event)"> New </a> </div> <div class="menuOptions"> <i class="material-icons" style="top: 1vh;position: relative;">add</i> <a href="#" (click) = "NewF($event)"> New </a> </div> <div class="menuOptions"> <i class="material-icons" style="top: 1vh;position: relative;">clear</i> <a href="#" (click) = "Close($event)"> Close </a> </div> </div> </div> </li>')
-    //e.path[4].outerHTML.append();
-    this.counter+=1
-    console.log(this.counter)
-    e.path[2+this.counter].style.display = "none";
-  }
+    @ViewChild('text_area1') text_area1: ElementRef;
+    public Rename = function(node, id) {
+        console.log("NODE", node)
+        this.rename = node
+        this.text_area1.nativeElement.style.display = "block"
+    }
+    public RenameName = function(e) {
+        e = e.trim()
+        if(e != "")
+            this.rename.data.name = e
+        this.text_area1.nativeElement.style.display = "none"
+    }
+    public Remove = function(node) {
+        console.log(node)
+        this.confirmed = false
+        if (node.hasChildren) {
+            this.confirmed = confirm("This node has children.\nDelete?")
+        } else {
+            this.confirmed = true
+        }
+        if (this.confirmed) {
+            let nodeParent = node.parent;
+            nodeParent.data.children.splice(nodeParent.data.children.indexOf(node.data), 1);
+            node.treeModel.update();
+            this.counter--;
+        }
+    }
 
-  public NewF = function(e){
-    console.log(e)
+    public New = function(node) {
+        node.data.children.push({
+            id: ++this.counter,
+            name: 'New Node',
+            children: []
+        });
+        node.treeModel.update();
+    }
+    public Close = function(e) {
+        console.log(e.path[3])
+        e.path[3].style.display = "none"
+    }
 
-  }
-  public Close = function(e){
-    console.log(e)
-    e.path[3].style.display = "none";
-  }
-  
-  
-  
-  ngOnInit() {
-  }
+
+    ngOnInit() {}
 
 }

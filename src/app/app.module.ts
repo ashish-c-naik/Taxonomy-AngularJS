@@ -3,8 +3,10 @@ import { NgModule } from '@angular/core';
 
 
 import { AppComponent } from './app.component';
-import { TreeModule } from 'ng2-tree';
 import { MyTreeComponent } from './my-tree/my-tree.component';
+import { MenuComponent } from './menu/menu.component';
+import { TreeModule } from 'angular-tree-component';
+
 @NgModule({
   declarations: [
     AppComponent,

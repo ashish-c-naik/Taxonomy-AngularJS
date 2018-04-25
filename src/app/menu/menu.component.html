@@ -1,0 +1,31 @@
+
+<app-menu>
+    <div (id)="menu1" class="menu" style="display:block;" #menu>
+        <div >
+          <div class="menuOptions">
+            <i class="material-icons" style="top: 1vh;position: relative;">create</i>
+            <a href="#" (click) = "Rename($event)"> 
+              Rename
+            </a>
+          </div>
+        <div class="menuOptions">
+            <i class="material-icons" style="top: 1vh;position: relative;">delete_sweep</i>
+            <a href="#" (click) = "Remove($event)"> 
+              Remove
+            </a>
+          </div>
+        <div class="menuOptions">
+            <i class="material-icons" style="top: 1vh;position: relative;">add</i>
+            <a href="#" (click) = "New($event)"> 
+              New
+            </a>
+          </div>
+        <div class="menuOptions">
+            <i class="material-icons" style="top: 1vh;position: relative;">clear</i>
+            <a href="#" (click) = "Close($event)"> 
+              Close
+            </a>
+          </div>
+      </div>
+      </div>
+</app-menu> 
