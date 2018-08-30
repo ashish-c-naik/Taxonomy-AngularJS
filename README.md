@@ -1,6 +1,6 @@
 # Taxonomy genrator using AngularJS and angular-tree-component usage
 
-Basic Taxonomy generated using the angularJs modular architechture
+Basic Taxonomy generated using the angularJs modular architechture to perfoem CRUD operations 
 
 # Technologies used:
 - [AngularJs](https://angular.io/)
