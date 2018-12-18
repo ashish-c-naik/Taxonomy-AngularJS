@@ -6,7 +6,8 @@
         <div style="margin-left:15px;">
             <tree-root [nodes]="data" (activate)="MakeBold($event.node.data.id)">
                 <ng-template #treeNodeTemplate let-node let-index="index">
-                    <span>{{node.data.name}}</span>
+                    <span ng-class="node" *ngIf="node.data.has_children=='False'" style="color:blue;">{{node.data.name}}</span>
+                    <span ng-class="node" *ngIf="node.data.has_children=='True'" style="color:green;">{{node.data.name}}</span>
                     <div id="menu{{node.data.id}}" class="menu" style="display: none;float: right;" #menu>
                         <div>
                             <div class="menuOptions">

@@ -25,46 +25,56 @@ export class MyTreeComponent implements OnInit {
         this.data = [{
                 id: 1,
                 name: 'Programming languages by programming paradigm',
+                has_children:"True",
                 children: [{
                         id: 2,
                         name: 'Object-oriented programming',
+                        has_children:"True",
                         children: [{
                             id:3,
                             name:"Java",
+                            has_children:"False",
                             children:[]
                         },{
                             id:4,
                             name:"C++",
+                            has_children:"False",
                             children:[]
                         },{
                             id:5,
                             name:"C#",
+                            has_children:"False",
                             children:[]
                         }]
                     },
                     {
                         id: 6,
                         name: 'Prototype-based programming',
+                        has_children:"True",
                         children: [{
                             id:7,
                             name:"Javascript",
+                            has_children:"False",
                             children:[]
                         },{
                             id:8,
                             name:"Coffeescript",
+                            has_children:"False",
                             children:[]
                         },{
                             id:9,
                             name:"Lua",
+                            has_children:"False",
                             children:[]
                         }]
                     }
                 ]
             }
         ];
+
+
     }
 
-    @ViewChild('menu') menu: ElementRef;
     public MakeBold = function(e) {
         console.log(e)
         if (this.display == false) {
@@ -102,12 +112,21 @@ export class MyTreeComponent implements OnInit {
             node.treeModel.update();
             this.counter--;
         }
+        this.parent_haschildren(node.parent)
+    }
+    parent_haschildren(node){
+        console.log(node.data)
+        if(node.data.children.length == 0){
+            node.data.has_children = "False"
+        }
     }
 
     public New = function(node) {
+        node.data.has_children = "True"
         node.data.children.push({
             id: ++this.counter,
             name: 'New Node',
+            has_children:"False",
             children: []
         });
         node.treeModel.update();
